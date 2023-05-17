@@ -36,7 +36,8 @@ class ColorScheme {
 class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
   ColorScheme colors = ColorScheme();
 
-  Future<void> fetchContextPlaylist(String playlistId) async {
+  Future<void> fetchContextPlaylist(String playlistId, String playlistName,
+      String playlistDescription) async {
     Map<String, String> requestHeader = {
       'x-functions-key':
           '_q6Qaip9V-PShHzF8q9l5yexp-z9IqwZB_o_6x882ts3AzFuo0DxuQ==',
@@ -51,6 +52,8 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
     _navigateToSpotifyContextPLaylistPage(
       context,
       playlistId,
+      playlistName,
+      playlistDescription,
       contextPlaylist,
     );
   }
@@ -169,9 +172,20 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      fetchContextPlaylist(widget
+                                      var playListDescription = widget.playlists
+                                          .playlists!.items![index].description
+                                          .toString();
+
+                                      var playListId = widget
                                           .playlists.playlists!.items![index].id
-                                          .toString());
+                                          .toString();
+
+                                      var playListName = widget.playlists
+                                          .playlists!.items![index].name
+                                          .toString();
+
+                                      fetchContextPlaylist(playListId,
+                                          playListName, playListDescription);
                                     },
                                     child: Container(
                                       margin: const EdgeInsets.symmetric(
@@ -231,9 +245,18 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
         ),
       ));
 
-  void _navigateToSpotifyContextPLaylistPage(BuildContext context,
-      String playlistid, ContextPlaylistModel contextPlaylist) {
-    Set contextPlaylistSet = {playlistid, contextPlaylist};
+  void _navigateToSpotifyContextPLaylistPage(
+      BuildContext context,
+      String playlistid,
+      String playlistName,
+      String playlistDescription,
+      ContextPlaylistModel contextPlaylist) {
+    Set contextPlaylistSet = {
+      playlistid,
+      playlistName,
+      playlistDescription,
+      contextPlaylist
+    };
 
     // replace because we don't want to navigate back to the landing screen
     Navigator.of(context).pushReplacementNamed(

@@ -36,11 +36,15 @@ class AppRoutes {
         final Set passedArguments = settings.arguments as Set;
         var passedArgumentsList = passedArguments.toList();
         String playlistId = passedArgumentsList[0];
-        ContextPlaylistModel contextPlaylist = passedArgumentsList[1];
+        String playlistName = passedArgumentsList[1];
+        String playlistDescription = passedArgumentsList[2];
+        ContextPlaylistModel contextPlaylist = passedArgumentsList[3];
 
         return MaterialPageRoute(
           builder: (BuildContext context) => SpotifyPlaylistPage(
-            playlist: playlistId,
+            playlistid: playlistId,
+            playlistname: playlistName,
+            playlistDescription: playlistDescription,
             contextPlaylist: contextPlaylist,
           ),
         );

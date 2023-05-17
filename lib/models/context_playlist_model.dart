@@ -171,7 +171,7 @@ class Owner {
 
 class Tracks {
   String? href;
-  List<Items>? items;
+  List<SinglePlaylists>? items;
   int? limit;
   Null? next;
   int? offset;
@@ -190,9 +190,9 @@ class Tracks {
   Tracks.fromJson(Map<String, dynamic> json) {
     href = json['href'];
     if (json['items'] != null) {
-      items = <Items>[];
+      items = <SinglePlaylists>[];
       json['items'].forEach((v) {
-        items!.add(new Items.fromJson(v));
+        items!.add(new SinglePlaylists.fromJson(v));
       });
     }
     limit = json['limit'];
@@ -217,7 +217,7 @@ class Tracks {
   }
 }
 
-class Items {
+class SinglePlaylists {
   String? addedAt;
   AddedBy? addedBy;
   bool? isLocal;
@@ -225,7 +225,7 @@ class Items {
   Track? track;
   VideoThumbnail? videoThumbnail;
 
-  Items(
+  SinglePlaylists(
       {this.addedAt,
       this.addedBy,
       this.isLocal,
@@ -233,7 +233,7 @@ class Items {
       this.track,
       this.videoThumbnail});
 
-  Items.fromJson(Map<String, dynamic> json) {
+  SinglePlaylists.fromJson(Map<String, dynamic> json) {
     addedAt = json['added_at'];
     addedBy = json['added_by'] != null
         ? new AddedBy.fromJson(json['added_by'])

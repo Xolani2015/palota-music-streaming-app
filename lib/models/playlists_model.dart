@@ -22,7 +22,7 @@ class PlaylistsModel {
 
 class Playlists {
   String? href;
-  List<Items>? items;
+  List<SinglePlaylists>? items;
   int? limit;
   String? next;
   int? offset;
@@ -42,9 +42,9 @@ class Playlists {
   Playlists.fromJson(Map<String, dynamic> json) {
     href = json['href'];
     if (json['items'] != null) {
-      items = <Items>[];
+      items = <SinglePlaylists>[];
       json['items'].forEach((v) {
-        items!.add(new Items.fromJson(v));
+        items!.add(new SinglePlaylists.fromJson(v));
       });
     }
     limit = json['limit'];
@@ -69,7 +69,7 @@ class Playlists {
   }
 }
 
-class Items {
+class SinglePlaylists {
   bool? collaborative;
   String? description;
   ExternalUrls? externalUrls;
@@ -85,7 +85,7 @@ class Items {
   String? type;
   String? uri;
 
-  Items(
+  SinglePlaylists(
       {this.collaborative,
       this.description,
       this.externalUrls,
@@ -101,7 +101,7 @@ class Items {
       this.type,
       this.uri});
 
-  Items.fromJson(Map<String, dynamic> json) {
+  SinglePlaylists.fromJson(Map<String, dynamic> json) {
     collaborative = json['collaborative'];
     description = json['description'];
     externalUrls = json['external_urls'] != null

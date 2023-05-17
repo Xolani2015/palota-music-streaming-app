@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spotify_africa_assessment/colors.dart';
 import 'package:flutter_spotify_africa_assessment/main.dart';
 import 'package:flutter_spotify_africa_assessment/models/context_playlist_model.dart';
 import 'package:flutter_spotify_africa_assessment/models/playlists_model.dart';
@@ -14,13 +15,17 @@ import 'package:flutter_spotify_africa_assessment/models/category_model.dart';
 // Feel free to change this to a stateful widget if necessary
 
 class SpotifyPlaylistPage extends StatefulWidget {
-  String playlist;
+  String playlistid;
+  String playlistname;
+  String playlistDescription;
 
   ContextPlaylistModel contextPlaylist;
   SpotifyPlaylistPage({
     Key? key,
-    required this.playlist,
+    required this.playlistid,
     required this.contextPlaylist,
+    required this.playlistname,
+    required this.playlistDescription,
   }) : super(key: key);
 
   @override
@@ -48,6 +53,25 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
     final json = jsonDecode(body);
     var playlist = PlaylistsModel.fromJson(json);
     _navigateToSpotifyContextPLaylistPage(context, category, playlist);
+  }
+
+  Widget returnTracks() {
+    List<Widget> items = [Container()];
+    for (var i = 0; i < widget.contextPlaylist.tracks!.items!.length; i++) {
+      items.add(Row(
+        children: [
+          Expanded(
+            child: Container(
+              height: 20,
+              child: Text(
+                widget.contextPlaylist.tracks!.items![i].track!.name.toString(),
+              ),
+            ),
+          ),
+        ],
+      ));
+    }
+    return Column(children: items);
   }
 
   @override
@@ -97,9 +121,10 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                               Container()),
                     ],
                   ),
-                  const Text(
-                    'Name of playlist',
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                  Text(
+                    widget.playlistname.toString(),
+                    style: const TextStyle(
+                        fontSize: 10, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -108,10 +133,104 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
               children: [
                 Expanded(
                     child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  height: 50,
+                  decoration: BoxDecoration(),
+                  child: Text(
+                    widget.playlistDescription.toString(),
+                    style: const TextStyle(
+                        fontSize: 12, fontWeight: FontWeight.bold),
+                  ),
+                ))
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   height: 50,
-                  decoration: BoxDecoration(color: colors.secondaryColor),
-                ))
+                  decoration: BoxDecoration(),
+                )),
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: colors.secondaryColor,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(7),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '353,567',
+                            style: const TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            'Followers',
+                            style: const TextStyle(
+                                fontSize: 12, fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            width: 15,
+                          ),
+                        ],
+                      ),
+                    ))
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      height: 6,
+                      decoration: BoxDecoration(
+                        color: colors.secondaryColor,
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: <Color>[
+                            AppColors.blue,
+                            AppColors.cyan,
+                            AppColors.green,
+                          ],
+                        ),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(7),
+                        ),
+                      ),
+                    ))
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 2,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(7),
+                        ),
+                      ),
+                      child: returnTracks(),
+                    ))
               ],
             )
           ],
