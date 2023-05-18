@@ -145,7 +145,12 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
   Widget build(BuildContext context) => StoreProvider<int>(
       store: store,
       child: Scaffold(
+        extendBodyBehindAppBar: true,
+        backgroundColor: colors.secondaryColor,
         appBar: AppBar(
+          toolbarHeight: 90,
+          backgroundColor: Color.fromARGB(110, 0, 0, 0),
+          elevation: 0,
           title: InkWell(
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(
@@ -154,16 +159,6 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                 );
               },
               child: Icon(Icons.arrow_back_rounded)),
-          backgroundColor: Color.fromARGB(42, 57, 57, 57),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.info_outline),
-              onPressed: () => Navigator.of(context).pushNamed(AppRoutes.about),
-            ),
-          ],
-          flexibleSpace: Container(
-            decoration: const BoxDecoration(),
-          ),
         ),
         body: ListView(
           children: [
