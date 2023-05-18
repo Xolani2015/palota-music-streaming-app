@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spotify_africa_assessment/colors.dart';
 import 'package:flutter_spotify_africa_assessment/features/landing/presentation/animations/rive_assets.dart';
 import 'package:flutter_spotify_africa_assessment/models/category_model.dart';
 import 'package:flutter_spotify_africa_assessment/models/playlists_model.dart';
@@ -106,12 +107,32 @@ class _LandingPageState extends State<LandingPage> {
                             SizedBox(
                               height: 50,
                               width: 50,
-                              child: CircularProgressIndicator(),
+                              child: CircularProgressIndicator(
+                                color: AppColors.cyan,
+                              ),
                             ),
                             SizedBox(
                               height: 20,
                             ),
-                            Text('Please wait fetching data..')
+                            Row(
+                              children: [
+                                Text(
+                                  'Please wait fetching',
+                                  style: TextStyle(
+                                      color: AppColors.green,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  'playlists...',
+                                  style: TextStyle(
+                                      color: AppColors.blue,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            )
                           ],
                         )
                       ],
