@@ -146,10 +146,10 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
       store: store,
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        backgroundColor: colors.secondaryColor,
+        //backgroundColor: colors.secondaryColor,
         appBar: AppBar(
           toolbarHeight: 90,
-          backgroundColor: Color.fromARGB(110, 0, 0, 0),
+          backgroundColor: Color.fromARGB(103, 42, 42, 42),
           elevation: 0,
           title: InkWell(
               onTap: () {
@@ -211,6 +211,9 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                 ))
               ],
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 Expanded(
@@ -264,9 +267,8 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       height: 6,
-                      decoration: BoxDecoration(
-                        color: colors.secondaryColor,
-                        gradient: const LinearGradient(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: <Color>[
@@ -275,7 +277,7 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                             AppColors.green,
                           ],
                         ),
-                        borderRadius: const BorderRadius.all(
+                        borderRadius: BorderRadius.all(
                           Radius.circular(7),
                         ),
                       ),
