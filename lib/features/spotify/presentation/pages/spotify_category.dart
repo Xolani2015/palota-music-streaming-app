@@ -155,7 +155,7 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                           height: 30,
                         ),
                         Container(
-                          height: 480,
+                          height: 500,
                           margin: const EdgeInsets.symmetric(
                             horizontal: 15,
                           ),
@@ -169,6 +169,7 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                 widget.playlists.playlists!.items!.length,
                                 (index) {
                               return Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   InkWell(
                                     onTap: () {
@@ -192,13 +193,12 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                           horizontal: 5, vertical: 5),
                                       padding: const EdgeInsets.symmetric(
                                         vertical: 5,
+                                        horizontal: 5,
                                       ),
                                       decoration: BoxDecoration(
                                           color: colors.secondaryColor,
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(7))),
-                                      height: 160,
-                                      width: 150,
                                       child: Column(
                                         children: [
                                           Row(
@@ -215,7 +215,7 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                                       BorderRadius.circular(7),
                                                   child: SizedBox.fromSize(
                                                     size: Size.fromRadius(
-                                                        60), // Image radius
+                                                        65), // Image radius
                                                     child: widget
                                                         .playlists
                                                         .playlists!
@@ -226,9 +226,6 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                                 ),
                                               ),
                                             ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
                                           ),
                                           Text(
                                             widget.playlists.playlists!
