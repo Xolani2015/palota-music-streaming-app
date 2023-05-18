@@ -58,12 +58,12 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
   Widget returnTracks() {
     List<Widget> items = [Container()];
     for (var i = 0; i < widget.contextPlaylist.tracks!.items!.length; i++) {
-      final time = Duration(
-          seconds: 2,
-          microseconds: widget
-              .contextPlaylist.tracks!.items![i].track!.durationMs!
-              .toInt());
-      print(time.toString().substring(5, 10));
+      // String durationToString(Duration duration) =>
+      //     (widget.contextPlaylist.tracks!.items![i].track!.durationMs! / 1000)
+      //         .toStringAsFixed(2)
+      //         .replaceFirst('.', ':')
+      //         .padLeft(5, '0');
+
       items.add(SizedBox(
         height: 70,
         child: Row(
@@ -72,7 +72,7 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
               child: Container(
                   color: colors.secondaryColor,
                   margin: EdgeInsets.all(7),
-                  height: 70,
+                  height: 90,
                   child: Text('')),
             ),
             Expanded(
@@ -81,23 +81,52 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                 children: [
                   Expanded(
                     flex: 7,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              height: 20,
+                              child: Text(
+                                widget.contextPlaylist.tracks!.items![i].track!
+                                    .name
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 10, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                child: Text(
+                                  widget.contextPlaylist.tracks!.items![i]
+                                      .track!.artists![0].name
+                                      .toString(),
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
                     child: Container(
                       height: 20,
-                      child: Text(
-                        widget.contextPlaylist.tracks!.items![i].track!.name
-                            .toString(),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      height: 20,
+                      child: const Text(
+                        '0:00m',
+                        style: TextStyle(fontSize: 12),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 20,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 20,
-                      child: Text(time.inMinutes.toString()),
                     ),
                   ),
                 ],
