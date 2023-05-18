@@ -85,15 +85,12 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                       children: [
                         Row(
                           children: [
-                            Container(
-                              height: 20,
-                              child: Text(
-                                widget.contextPlaylist.tracks!.items![i].track!
-                                    .name
-                                    .toString(),
-                                style: TextStyle(
-                                    fontSize: 10, fontWeight: FontWeight.bold),
-                              ),
+                            Text(
+                              widget
+                                  .contextPlaylist.tracks!.items![i].track!.name
+                                  .toString(),
+                              style: const TextStyle(
+                                  fontSize: 10, fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
@@ -177,17 +174,22 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                          height: 200,
-                          width: 200,
-                          child: widget.contextPlaylist.images![0].image ??
-                              Container()),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(7),
+                        child: SizedBox.fromSize(
+                            size: Size.fromRadius(100), // Image radius
+                            child: widget.contextPlaylist.images![0].image ??
+                                Container()),
+                      ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Text(
                     widget.playlistname.toString(),
                     style: const TextStyle(
-                        fontSize: 10, fontWeight: FontWeight.bold),
+                        fontSize: 14, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

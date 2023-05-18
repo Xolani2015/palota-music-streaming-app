@@ -118,9 +118,12 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                           child: Row(
                             children: [
                               Expanded(
-                                child: Container(
-                                  color: Colors.transparent,
-                                  child: widget.category.image,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(7),
+                                  child: SizedBox.fromSize(
+                                      size: Size.fromRadius(40), // Image radius
+                                      child:
+                                          widget.category.image ?? Container()),
                                 ),
                               ),
                               Expanded(
