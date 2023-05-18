@@ -1,4 +1,4 @@
-import 'package:flutter_spotify_africa_assessment/models/playlists_model.dart';
+import 'package:flutter/widgets.dart';
 
 class ContextPlaylistModel {
   bool? collaborative;
@@ -7,7 +7,7 @@ class ContextPlaylistModel {
   Followers? followers;
   String? href;
   String? id;
-  List<Images>? images;
+  List<SongImages>? images;
   String? name;
   Owner? owner;
   String? primaryColor;
@@ -16,6 +16,7 @@ class ContextPlaylistModel {
   Tracks? tracks;
   String? type;
   String? uri;
+  Image? playlistImage;
 
   ContextPlaylistModel(
       {this.collaborative,
@@ -46,11 +47,19 @@ class ContextPlaylistModel {
     href = json['href'];
     id = json['id'];
     if (json['images'] != null) {
-      images = <Images>[];
+      images = <SongImages>[];
       json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
+        images!.add(new SongImages.fromJson(v));
       });
     }
+
+    if (images != null) {
+      playlistImage = Image.network(images![0].url!);
+    } else {
+      //TODO: find defaul image or something
+      playlistImage = Image.network('');
+    }
+
     name = json['name'];
     owner = json['owner'] != null ? new Owner.fromJson(json['owner']) : null;
     primaryColor = json['primary_color'];
@@ -128,6 +137,28 @@ class Followers {
   }
 }
 
+class SongImages {
+  int? height;
+  String? url;
+  int? width;
+
+  SongImages({this.height, this.url, this.width});
+
+  SongImages.fromJson(Map<String, dynamic> json) {
+    height = json['height'];
+    url = json['url'];
+    width = json['width'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['height'] = this.height;
+    data['url'] = this.url;
+    data['width'] = this.width;
+    return data;
+  }
+}
+
 class Owner {
   String? displayName;
   ExternalUrls? externalUrls;
@@ -171,7 +202,7 @@ class Owner {
 
 class Tracks {
   String? href;
-  List<SinglePlaylists>? items;
+  List<Items>? items;
   int? limit;
   Null? next;
   int? offset;
@@ -190,9 +221,9 @@ class Tracks {
   Tracks.fromJson(Map<String, dynamic> json) {
     href = json['href'];
     if (json['items'] != null) {
-      items = <SinglePlaylists>[];
+      items = <Items>[];
       json['items'].forEach((v) {
-        items!.add(new SinglePlaylists.fromJson(v));
+        items!.add(new Items.fromJson(v));
       });
     }
     limit = json['limit'];
@@ -217,7 +248,7 @@ class Tracks {
   }
 }
 
-class SinglePlaylists {
+class Items {
   String? addedAt;
   AddedBy? addedBy;
   bool? isLocal;
@@ -225,7 +256,7 @@ class SinglePlaylists {
   Track? track;
   VideoThumbnail? videoThumbnail;
 
-  SinglePlaylists(
+  Items(
       {this.addedAt,
       this.addedBy,
       this.isLocal,
@@ -233,7 +264,7 @@ class SinglePlaylists {
       this.track,
       this.videoThumbnail});
 
-  SinglePlaylists.fromJson(Map<String, dynamic> json) {
+  Items.fromJson(Map<String, dynamic> json) {
     addedAt = json['added_at'];
     addedBy = json['added_by'] != null
         ? new AddedBy.fromJson(json['added_by'])
@@ -409,28 +440,30 @@ class Album {
   ExternalUrls? externalUrls;
   String? href;
   String? id;
-  List<Images>? images;
+  List<SongImages>? images;
   String? name;
   String? releaseDate;
   String? releaseDatePrecision;
   int? totalTracks;
   String? type;
   String? uri;
+  Image? image;
 
-  Album(
-      {this.albumType,
-      this.artists,
-      this.availableMarkets,
-      this.externalUrls,
-      this.href,
-      this.id,
-      this.images,
-      this.name,
-      this.releaseDate,
-      this.releaseDatePrecision,
-      this.totalTracks,
-      this.type,
-      this.uri});
+  Album({
+    this.albumType,
+    this.artists,
+    this.availableMarkets,
+    this.externalUrls,
+    this.href,
+    this.id,
+    this.images,
+    this.name,
+    this.releaseDate,
+    this.releaseDatePrecision,
+    this.totalTracks,
+    this.type,
+    this.uri,
+  });
 
   Album.fromJson(Map<String, dynamic> json) {
     albumType = json['album_type'];
@@ -447,11 +480,18 @@ class Album {
     href = json['href'];
     id = json['id'];
     if (json['images'] != null) {
-      images = <Images>[];
+      images = <SongImages>[];
       json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
+        images!.add(new SongImages.fromJson(v));
       });
     }
+    if (images != null) {
+      image = Image.network(images![0].url!);
+    } else {
+      //TODO: find defaul image or something
+      image = Image.network('');
+    }
+
     name = json['name'];
     releaseDate = json['release_date'];
     releaseDatePrecision = json['release_date_precision'];

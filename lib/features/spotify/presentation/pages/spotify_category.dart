@@ -160,7 +160,7 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                         Container(
                           height: 500,
                           margin: const EdgeInsets.symmetric(
-                            horizontal: 15,
+                            horizontal: 10,
                           ),
 
                           child: GridView.count(
@@ -191,55 +191,53 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                       fetchContextPlaylist(playListId,
                                           playListName, playListDescription);
                                     },
-                                    child: Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 5, vertical: 5),
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 5,
-                                        horizontal: 5,
-                                      ),
-                                      decoration: BoxDecoration(
-                                          color: colors.secondaryColor,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(7))),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                decoration: BoxDecoration(
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.all(7),
+                                              decoration: BoxDecoration(
+                                                  color: colors.secondaryColor,
+                                                  borderRadius:
+                                                      BorderRadius.circular(7)),
+                                              child: Column(
+                                                children: [
+                                                  ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            7)),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(7),
-                                                  child: SizedBox.fromSize(
-                                                    size: Size.fromRadius(
-                                                        65), // Image radius
-                                                    child: widget
-                                                        .playlists
-                                                        .playlists!
-                                                        .items![index]
-                                                        .images![0]
-                                                        .image,
+                                                            7),
+                                                    child: SizedBox.fromSize(
+                                                      size: Size.fromRadius(
+                                                          60), // Image radius
+                                                      child: widget
+                                                          .playlists
+                                                          .playlists!
+                                                          .items![index]
+                                                          .images![0]
+                                                          .image,
+                                                    ),
                                                   ),
-                                                ),
+                                                  Text(
+                                                    widget.playlists.playlists!
+                                                        .items![index].name
+                                                        .toString(),
+                                                    style: const TextStyle(
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 5,
+                                                  )
+                                                ],
                                               ),
-                                            ],
-                                          ),
-                                          Text(
-                                            widget.playlists.playlists!
-                                                .items![index].name
-                                                .toString(),
-                                            style: const TextStyle(
-                                                fontSize: 10,
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                        ],
-                                      ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],

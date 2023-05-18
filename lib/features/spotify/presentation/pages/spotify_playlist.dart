@@ -69,12 +69,19 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
         child: Row(
           children: [
             Expanded(
-              child: Container(
-                  color: colors.secondaryColor,
-                  margin: EdgeInsets.all(7),
-                  height: 90,
-                  child: Text('')),
-            ),
+                child: Container(
+              color: colors.secondaryColor,
+              margin: EdgeInsets.all(7),
+              height: 90,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(7),
+                child: SizedBox.fromSize(
+                    size: Size.fromRadius(100), // Image radius
+                    child: widget.contextPlaylist.tracks!.items![i].track!
+                            .album!.image ??
+                        Container()),
+              ),
+            )),
             Expanded(
               flex: 3,
               child: Row(
@@ -178,7 +185,7 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                         borderRadius: BorderRadius.circular(7),
                         child: SizedBox.fromSize(
                             size: Size.fromRadius(100), // Image radius
-                            child: widget.contextPlaylist.images![0].image ??
+                            child: widget.contextPlaylist.playlistImage ??
                                 Container()),
                       ),
                     ],
@@ -228,23 +235,23 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                           Radius.circular(7),
                         ),
                       ),
-                      child: const Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            '353,567',
-                            style: TextStyle(
+                            '343,232',
+                            style: const TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
-                          Text(
+                          const Text(
                             'Followers',
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 15,
                           ),
                         ],
