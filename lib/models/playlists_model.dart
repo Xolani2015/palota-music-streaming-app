@@ -85,6 +85,7 @@ class SinglePlaylists {
   String? type;
   String? uri;
 
+
   SinglePlaylists(
       {this.collaborative,
       this.description,
@@ -124,6 +125,8 @@ class SinglePlaylists {
         json['tracks'] != null ? new Tracks.fromJson(json['tracks']) : null;
     type = json['type'];
     uri = json['uri'];
+
+
   }
 
   Map<String, dynamic> toJson() {

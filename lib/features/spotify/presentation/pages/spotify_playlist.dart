@@ -58,17 +58,53 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
   Widget returnTracks() {
     List<Widget> items = [Container()];
     for (var i = 0; i < widget.contextPlaylist.tracks!.items!.length; i++) {
-      items.add(Row(
-        children: [
-          Expanded(
-            child: Container(
-              height: 20,
-              child: Text(
-                widget.contextPlaylist.tracks!.items![i].track!.name.toString(),
+      final time = Duration(
+          seconds: 2,
+          microseconds: widget
+              .contextPlaylist.tracks!.items![i].track!.durationMs!
+              .toInt());
+      print(time.toString().substring(5, 10));
+      items.add(SizedBox(
+        height: 70,
+        child: Row(
+          children: [
+            Expanded(
+              child: Container(
+                  color: colors.secondaryColor,
+                  margin: EdgeInsets.all(7),
+                  height: 70,
+                  child: Text('')),
+            ),
+            Expanded(
+              flex: 3,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: Container(
+                      height: 20,
+                      child: Text(
+                        widget.contextPlaylist.tracks!.items![i].track!.name
+                            .toString(),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 20,
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 20,
+                      child: Text(time.inMinutes.toString()),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ));
     }
     return Column(children: items);
@@ -215,7 +251,7 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                     ))
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -224,8 +260,8 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                     flex: 2,
                     child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(
                           Radius.circular(7),
                         ),
                       ),
