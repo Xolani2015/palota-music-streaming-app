@@ -1,0 +1,16 @@
+za.co.palota.flutter_spotify_africa_assessment.app-jetified-window-java-1.0.0-beta04-0 C:\Users\xolan\.gradle\caches\transforms-3\006d93cd422dbc43e89591147c2de572\transformed\jetified-window-java-1.0.0-beta04\res
+za.co.palota.flutter_spotify_africa_assessment.app-core-1.6.0-1 C:\Users\xolan\.gradle\caches\transforms-3\4ca28c4a71705f8a687c69dda140a277\transformed\core-1.6.0\res
+za.co.palota.flutter_spotify_africa_assessment.app-jetified-annotation-experimental-1.1.0-2 C:\Users\xolan\.gradle\caches\transforms-3\8965c941cf4bee4d72541b965c7c9d39\transformed\jetified-annotation-experimental-1.1.0\res
+za.co.palota.flutter_spotify_africa_assessment.app-jetified-window-1.0.0-beta04-3 C:\Users\xolan\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\res
+za.co.palota.flutter_spotify_africa_assessment.app-debug-4 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\android\app\src\debug\res
+za.co.palota.flutter_spotify_africa_assessment.app-main-5 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\android\app\src\main\res
+za.co.palota.flutter_spotify_africa_assessment.app-pngs-6 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\app\generated\res\pngs\debug
+za.co.palota.flutter_spotify_africa_assessment.app-resValues-7 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\app\generated\res\resValues\debug
+za.co.palota.flutter_spotify_africa_assessment.app-rs-8 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\app\generated\res\rs\debug
+za.co.palota.flutter_spotify_africa_assessment.app-mergeDebugResources-9 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+za.co.palota.flutter_spotify_africa_assessment.app-mergeDebugResources-10 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+za.co.palota.flutter_spotify_africa_assessment.app-merged_res-11 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\app\intermediates\merged_res\debug
+za.co.palota.flutter_spotify_africa_assessment.app-packaged_res-12 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\package_info_plus\intermediates\packaged_res\debug
+za.co.palota.flutter_spotify_africa_assessment.app-packaged_res-13 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\path_provider_android\intermediates\packaged_res\debug
+za.co.palota.flutter_spotify_africa_assessment.app-packaged_res-14 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\rive_common\intermediates\packaged_res\debug
+za.co.palota.flutter_spotify_africa_assessment.app-packaged_res-15 C:\Users\xolan\Documents\my projects\palota-music-streaming-app\build\url_launcher_android\intermediates\packaged_res\debug

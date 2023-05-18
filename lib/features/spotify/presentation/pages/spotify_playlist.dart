@@ -33,7 +33,7 @@ class SpotifyPlaylistPage extends StatefulWidget {
 }
 
 class ColorScheme {
-  var secondaryColor = const Color.fromARGB(255, 62, 62, 62);
+  var secondaryColor = Color.fromARGB(255, 42, 42, 42);
   ColorScheme();
 }
 
@@ -101,8 +101,8 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                           children: [
                             Expanded(
                               child: Text(
-                                widget.contextPlaylist.tracks!.items![i]
-                                    .track!.artists![0].name
+                                widget.contextPlaylist.tracks!.items![i].track!
+                                    .artists![0].name
                                     .toString(),
                                 style: TextStyle(fontSize: 10),
                               ),

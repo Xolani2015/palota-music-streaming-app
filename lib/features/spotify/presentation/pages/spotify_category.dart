@@ -29,7 +29,7 @@ class SpotifyCategoryConnector extends StatefulWidget {
 }
 
 class ColorScheme {
-  var secondaryColor = const Color.fromARGB(255, 62, 62, 62);
+  var secondaryColor = Color.fromARGB(255, 42, 42, 42);
   ColorScheme();
 }
 
@@ -205,23 +205,37 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              SizedBox(
-                                                height: 130,
-                                                width: 130,
-                                                child: widget
-                                                    .playlists
-                                                    .playlists!
-                                                    .items![index]
-                                                    .images![0]
-                                                    .image,
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.red,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            7)),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(7),
+                                                  child: SizedBox.fromSize(
+                                                    size: Size.fromRadius(
+                                                        60), // Image radius
+                                                    child: widget
+                                                        .playlists
+                                                        .playlists!
+                                                        .items![index]
+                                                        .images![0]
+                                                        .image,
+                                                  ),
+                                                ),
                                               ),
                                             ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
                                           ),
                                           Text(
                                             widget.playlists.playlists!
                                                 .items![index].name
                                                 .toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 10,
                                                 fontWeight: FontWeight.bold),
                                           )
