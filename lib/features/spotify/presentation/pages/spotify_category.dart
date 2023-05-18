@@ -207,7 +207,6 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                             children: [
                                               Container(
                                                 decoration: BoxDecoration(
-                                                    color: Colors.red,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             7)),
