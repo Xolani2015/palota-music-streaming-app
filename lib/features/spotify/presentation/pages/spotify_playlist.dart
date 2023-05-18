@@ -100,13 +100,11 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                         Row(
                           children: [
                             Expanded(
-                              child: Container(
-                                child: Text(
-                                  widget.contextPlaylist.tracks!.items![i]
-                                      .track!.artists![0].name
-                                      .toString(),
-                                  style: TextStyle(fontSize: 10),
-                                ),
+                              child: Text(
+                                widget.contextPlaylist.tracks!.items![i]
+                                    .track!.artists![0].name
+                                    .toString(),
+                                style: TextStyle(fontSize: 10),
                               ),
                             ),
                           ],
@@ -228,12 +226,12 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                           Radius.circular(7),
                         ),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
                             '353,567',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -241,7 +239,7 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                           ),
                           Text(
                             'Followers',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(

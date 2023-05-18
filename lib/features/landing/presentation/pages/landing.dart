@@ -98,7 +98,7 @@ class _LandingPageState extends State<LandingPage> {
                   Expanded(
                       child: Container(
                     color: const Color.fromRGBO(0, 0, 0, 0),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Column(
