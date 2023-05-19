@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spotify_africa_assessment/colors.dart';
+import 'package:flutter_spotify_africa_assessment/configurations/api.dart';
 import 'package:flutter_spotify_africa_assessment/features/landing/presentation/animations/rive_assets.dart';
 import 'package:flutter_spotify_africa_assessment/models/category_model.dart';
 import 'package:flutter_spotify_africa_assessment/models/playlists_model.dart';
@@ -27,11 +28,10 @@ class _LandingPageState extends State<LandingPage> {
   Future<void> fetchPlaylists(CategoryModel category) async {
     var categoryName = category.name!.toLowerCase();
     Map<String, String> requestHeader = {
-      'x-functions-key':
-          '_q6Qaip9V-PShHzF8q9l5yexp-z9IqwZB_o_6x882ts3AzFuo0DxuQ==',
+      'x-functions-key': headerkey,
     };
-    final url =
-        'https://palota-jobs-africa-spotify-fa.azurewebsites.net/api/browse/categories/${categoryName}/playlists';
+    final endPoint = 'browse/categories/$categoryName/playlists';
+    final url = '$baseURL/$endPoint';
     final uri = Uri.parse(url);
     final response = await http.get(uri, headers: requestHeader);
     final body = response.body;
@@ -42,18 +42,16 @@ class _LandingPageState extends State<LandingPage> {
 
   fetchCatergories() async {
     Map<String, String> requestHeader = {
-      'x-functions-key':
-          '_q6Qaip9V-PShHzF8q9l5yexp-z9IqwZB_o_6x882ts3AzFuo0DxuQ==',
+      'x-functions-key': headerkey,
     };
-    const url =
-        'https://palota-jobs-africa-spotify-fa.azurewebsites.net/api/browse/categories/afro';
+    const endPoint = 'browse/categories/afro';
+    const url = '$baseURL/$endPoint';
     final uri = Uri.parse(url);
     final response = await http.get(uri, headers: requestHeader);
     if (response.statusCode == 200) {
       final body = response.body;
       final json = jsonDecode(body);
       var category = CategoryModel.fromJson(json);
-
       fetchPlaylists(category);
     } else {
       //TODO: log d
