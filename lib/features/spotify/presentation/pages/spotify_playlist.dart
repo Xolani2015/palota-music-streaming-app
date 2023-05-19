@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:async_redux/async_redux.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spotify_africa_assessment/colors.dart';
+import 'package:flutter_spotify_africa_assessment/configurations/api.dart';
 import 'package:flutter_spotify_africa_assessment/main.dart';
 import 'package:flutter_spotify_africa_assessment/models/context_playlist_model.dart';
 import 'package:flutter_spotify_africa_assessment/models/playlists_model.dart';
@@ -42,11 +43,9 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
 
   Future<void> fetchPlaylists(CategoryModel category) async {
     Map<String, String> requestHeader = {
-      'x-functions-key':
-          '_q6Qaip9V-PShHzF8q9l5yexp-z9IqwZB_o_6x882ts3AzFuo0DxuQ==',
+      'x-functions-key': headerkey,
     };
-    final url =
-        'https://palota-jobs-africa-spotify-fa.azurewebsites.net/api/playlists/37i9dQZF1DX6036iaZ2MYP';
+    final url = '$baseURL/playlists/${widget.playlistid}';
     final uri = Uri.parse(url);
     final response = await http.get(uri, headers: requestHeader);
     final body = response.body;
@@ -233,23 +232,23 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                           Radius.circular(7),
                         ),
                       ),
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
                             '343,232',
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 5,
                           ),
-                          const Text(
+                          Text(
                             'Followers',
                             style: TextStyle(
                                 fontSize: 12, fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 15,
                           ),
                         ],
@@ -257,7 +256,7 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                     ))
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
