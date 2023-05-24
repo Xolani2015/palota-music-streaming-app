@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, prefer_const_constructors
 
 import 'dart:convert';
 import 'package:async_redux/async_redux.dart';
@@ -41,6 +41,9 @@ class ColorScheme {
 class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
   ColorScheme colors = ColorScheme();
 
+  bool _isExtendedList = false;
+  List<Items> trackList = [];
+
   Future<void> fetchPlaylists(CategoryModel category) async {
     Map<String, String> requestHeader = {
       'x-functions-key': headerkey,
@@ -54,90 +57,123 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
     _navigateToSpotifyContextPLaylistPage(context, category, playlist);
   }
 
-  Widget returnTracks() {
+  Widget returnFeaturedArtists() {
     List<Widget> items = [Container()];
-    for (var i = 0; i < widget.contextPlaylist.tracks!.items!.length; i++) {
-      // String durationToString(Duration duration) =>
-      //     (widget.contextPlaylist.tracks!.items![i].track!.durationMs! / 1000)
-      //         .toStringAsFixed(2)
-      //         .replaceFirst('.', ':')
-      //         .padLeft(5, '0');
-
-      items.add(SizedBox(
-        height: 70,
-        child: Row(
-          children: [
-            Expanded(
-                child: Container(
-              color: colors.secondaryColor,
-              margin: EdgeInsets.all(7),
-              height: 90,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(7),
-                child: SizedBox.fromSize(
-                    size: Size.fromRadius(100), // Image radius
-                    child: widget.contextPlaylist.tracks!.items![i].track!
-                            .album!.image ??
-                        Container()),
-              ),
-            )),
-            Expanded(
-              flex: 3,
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 7,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              widget
-                                  .contextPlaylist.tracks!.items![i].track!.name
-                                  .toString(),
-                              style: const TextStyle(
-                                  fontSize: 10, fontWeight: FontWeight.bold),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                widget.contextPlaylist.tracks!.items![i].track!
-                                    .artists![0].name
-                                    .toString(),
-                                style: TextStyle(fontSize: 10),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 20,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      height: 20,
-                      child: const Text(
-                        '0:00m',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+    for (int i = 0; i > widget.contextPlaylist.tracks!.items!.length; i++) {
+      items.add(Container(
+        height: 40,
+        child: Text(widget.contextPlaylist.tracks!.items![i]!.track!.artists
+            .toString()),
       ));
     }
-    return Column(children: items);
+    return Container();
+  }
+
+  Widget returnTracks(bool isExtendList) {
+    trackList = [];
+    trackList = widget.contextPlaylist.tracks!.items ?? [];
+
+    int loopLength = widget.contextPlaylist.tracks!.items!.length;
+
+    if (!isExtendList) {
+      if (trackList.length > 5) {
+        loopLength = 5;
+      }
+    }
+
+    if (trackList.isNotEmpty) {
+      List<Widget> items = [Container()];
+
+      // for (var i = 0; i < widget.contextPlaylist.tracks!.items!.length; i++) {
+      for (var i = 0; i < loopLength; i++) {
+        // String durationToString(Duration duration) =>
+        //     (widget.contextPlaylist.tracks!.items![i].track!.durationMs! / 1000)
+        //         .toStringAsFixed(2)
+        //         .replaceFirst('.', ':')
+        //         .padLeft(5, '0');
+
+        items.add(SizedBox(
+          height: 70,
+          child: Row(
+            children: [
+              Expanded(
+                  child: Container(
+                color: colors.secondaryColor,
+                margin: EdgeInsets.all(7),
+                height: 90,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(7),
+                  child: SizedBox.fromSize(
+                      size: Size.fromRadius(100), // Image radius
+                      child: widget.contextPlaylist.tracks!.items![i].track!
+                              .album!.image ??
+                          Container()),
+                ),
+              )),
+              Expanded(
+                flex: 3,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 7,
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 160,
+                                child: Text(
+                                  widget.contextPlaylist.tracks!.items![i]
+                                      .track!.name
+                                      .toString(),
+                                  style: const TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  widget.contextPlaylist.tracks!.items![i]
+                                      .track!.artists![0].name
+                                      .toString(),
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 20,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        height: 20,
+                        child: const Text(
+                          '0:00m',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ));
+      }
+      return Column(children: items);
+    } else {
+      return const Text('No Track Found');
+    }
   }
 
   @override
@@ -213,49 +249,7 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
             const SizedBox(
               height: 20,
             ),
-            Row(
-              children: [
-                Expanded(
-                    child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  height: 50,
-                  decoration: BoxDecoration(),
-                )),
-                Expanded(
-                    flex: 2,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: colors.secondaryColor,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(7),
-                        ),
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Text(
-                            '343,232',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            'Followers',
-                            style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(
-                            width: 15,
-                          ),
-                        ],
-                      ),
-                    ))
-              ],
-            ),
+            _informationWidget('452323', true, MainAxisAlignment.end),
             const SizedBox(
               height: 20,
             ),
@@ -297,13 +291,191 @@ class _SpotifyCategoryState extends State<SpotifyPlaylistPage> {
                           Radius.circular(7),
                         ),
                       ),
-                      child: returnTracks(),
+                      child: _isExtendedList
+                          ? returnTracks(true)
+                          : returnTracks(false),
                     ))
               ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    setState(() {
+                      if (_isExtendedList) {
+                        _isExtendedList = false;
+                      } else {
+                        _isExtendedList = true;
+                      }
+                    });
+                  },
+                  child: Container(
+                    //     margin: const EdgeInsets.symmetric(horizontal: 70),
+                    height: 50,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      color: colors.secondaryColor,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Center(
+                        child: Text(
+                      !_isExtendedList ? 'View More' : 'View Less',
+                      style: const TextStyle(fontSize: 10),
+                    )),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                Expanded(
+                    child: Container(
+                  height: 20,
+                )),
+                Expanded(
+                    flex: 6,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: colors.secondaryColor,
+                          borderRadius: BorderRadius.all(Radius.circular(10))),
+                      height: 50,
+                      child: Row(
+                        children: const [
+                          Padding(
+                            padding: EdgeInsets.only(left: 10),
+                            child: Text(
+                              'Featured Artists',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 14),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
+                Expanded(
+                    flex: 4,
+                    child: Container(
+                      height: 20,
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    height: 120,
+                    child: ListView(
+                      // This next line does the trick.
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          width: 150.0,
+                          decoration: BoxDecoration(
+                            color: colors.secondaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          width: 150.0,
+                          decoration: BoxDecoration(
+                            color: colors.secondaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          width: 150.0,
+                          decoration: BoxDecoration(
+                            color: colors.secondaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 5),
+                          width: 150.0,
+                          decoration: BoxDecoration(
+                            color: colors.secondaryColor,
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 40,
             )
           ],
         ),
       ));
+
+  Row _informationWidget(String text, bool isNumOfFollowerWidget,
+      MainAxisAlignment mainAxisAlignment) {
+    return Row(
+      children: [
+        Expanded(
+            child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
+          height: 50,
+          decoration: const BoxDecoration(),
+        )),
+        Expanded(
+            flex: 2,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              height: 40,
+              decoration: BoxDecoration(
+                color: colors.secondaryColor,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(7),
+                ),
+              ),
+              child: isNumOfFollowerWidget
+                  ? Row(
+                      mainAxisAlignment: mainAxisAlignment,
+                      children: [
+                        Text(
+                          text,
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Followers',
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          width: 15,
+                        ),
+                      ],
+                    )
+                  : Text(
+                      text,
+                      style:
+                          TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                    ),
+            ))
+      ],
+    );
+  }
 
   void _navigateToSpotifyContextPLaylistPage(BuildContext context,
       CategoryModel category, PlaylistsModel playlistsModel) {

@@ -121,7 +121,8 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(7),
                                   child: SizedBox.fromSize(
-                                      size: Size.fromRadius(40), // Image radius
+                                      size: const Size.fromRadius(
+                                          40), // Image radius
                                       child:
                                           widget.category.image ?? Container()),
                                 ),
@@ -129,7 +130,7 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                               Expanded(
                                 flex: 3,
                                 child: Padding(
-                                  padding: EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(10),
                                   child: Row(
                                     children: [
                                       Text(
@@ -198,7 +199,7 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Container(
-                                              padding: EdgeInsets.all(7),
+                                              padding: const EdgeInsets.all(7),
                                               decoration: BoxDecoration(
                                                   color: colors.secondaryColor,
                                                   borderRadius:
@@ -210,7 +211,8 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                                         BorderRadius.circular(
                                                             7),
                                                     child: SizedBox.fromSize(
-                                                      size: Size.fromRadius(
+                                                      size: const Size
+                                                              .fromRadius(
                                                           60), // Image radius
                                                       child: widget
                                                           .playlists
@@ -229,7 +231,7 @@ class _SpotifyCategoryState extends State<SpotifyCategoryConnector> {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 5,
                                                   )
                                                 ],
